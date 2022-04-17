@@ -8,3 +8,5 @@ This project does not contain a license, therefore you are not allowed to add on
 
 ## Credits
 CFX for the "baseevents" resource providing me with something to build off.
+
+https://discord.gg/GUhYGu999z
