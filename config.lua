@@ -3,7 +3,7 @@ Config.Debug = true
 
 -- Server and Client Debug Code :)
 if Config.Debug then
-    RegisterNetEvent('tnj-events:onPlayerShoot', function(isShooting, isShootingEntity, entityShot, entityType)
+    RegisterNetEvent('tnj-events:onPlayerShoot', function(isShooting, isShootingEntity, entityShot, entityType, shotFromVehicle)
         --[[
             entityType:
             0 = no entity
@@ -11,6 +11,6 @@ if Config.Debug then
             2 = vehicle
             3 = object
         ]]
-        print(isShooting, isShootingEntity, entityShot, entityType)
+        print(isShooting, isShootingEntity, entityShot, entityType, shotFromVehicle)
     end)
 end
