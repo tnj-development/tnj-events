@@ -21,6 +21,7 @@ local isInVehicle = false
 local isEnteringVehicle = false
 local currentVehicle = 0
 local currentSeat = 0
+local engineState = 0
 
 CreateThread(function()
 	while true do
@@ -39,6 +40,7 @@ CreateThread(function()
                 TriggerEvent('tnj-events:enteringVehicle', vehicle, seat, GetDisplayNameFromVehicleModel(GetEntityModel(vehicle)), netId)
 			elseif not DoesEntityExist(GetVehiclePedIsTryingToEnter(ped)) and not IsPedInAnyVehicle(ped, true) and isEnteringVehicle then
 				-- vehicle entering aborted
+				engineState = false
 				TriggerServerEvent('tnj-events:enteringAborted')
                 TriggerEvent('tnj-events:enteringAborted')
 				isEnteringVehicle = false
@@ -65,6 +67,11 @@ CreateThread(function()
 				isInVehicle = false
 				currentVehicle = 0
 				currentSeat = 0
+			elseif GetIsVehicleEngineRunning(currentVehicle) ~= engineState then
+				engineState = GetIsVehicleEngineRunning(currentVehicle)
+				local netId = VehToNet(currentVehicle)
+				TriggerServerEvent('tnj-events:engineChange', engineState, currentVehicle, GetDisplayNameFromVehicleModel(GetEntityModel(currentVehicle)), netId)
+                TriggerEvent('tnj-events:engineChange', engineState, currentVehicle, GetDisplayNameFromVehicleModel(GetEntityModel(currentVehicle)), netId)
 			end
 		end
 		Wait(50)
