@@ -30,8 +30,9 @@ CreateThread(function()
                 local isShootingEntity, entityShot = GetEntityPlayerIsFreeAimingAt(player)
                 local entityType = GetEntityType(entityShot)
                 local shotFromVehicle = IsPedDoingDriveby(ped)
-                TriggerEvent('tnj-events:onPlayerShoot', isShooting, isShootingEntity, entityShot, entityType, shotFromVehicle)
-                TriggerServerEvent('tnj-events:onPlayerShoot', isShooting, isShootingEntity, entityShot, entityType, shotFromVehicle)
+		local weapon = GetSelectedPedWeapon(ped)
+                TriggerEvent('tnj-events:onPlayerShoot', isShooting, isShootingEntity, entityShot, entityType, shotFromVehicle, weapon)
+                TriggerServerEvent('tnj-events:onPlayerShoot', isShooting, isShootingEntity, entityShot, entityType, shotFromVehicle, weapon)
             end
 
         end
